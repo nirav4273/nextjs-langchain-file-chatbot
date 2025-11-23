@@ -163,9 +163,20 @@ export const FileUploadComponent = ({ onFileProcessed }: FileUploadComponentProp
         <button
           onClick={handleUpload}
           disabled={uploading || processing.loading}
-          className="w-full mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-semibold rounded transition-colors duration-200 text-sm"
+          className="w-full mt-3 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-semibold rounded transition-colors duration-200 text-sm flex items-center justify-center gap-2"
         >
-          {uploading ? 'Uploading...' : 'Upload'}
+          {uploading ? (
+            <>
+              <div className="flex space-x-1">
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" />
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce delay-100" />
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce delay-200" />
+              </div>
+              <span>Uploading...</span>
+            </>
+          ) : (
+            'Upload'
+          )}
         </button>
       )}
 
@@ -213,11 +224,9 @@ export const FileUploadComponent = ({ onFileProcessed }: FileUploadComponentProp
           <p className="font-semibold text-xs mb-2">✓ Document Ready!</p>
           <div className="text-xs space-y-1 mb-2">
             <p><strong>File:</strong> {String(processing.documentInfo.filename)}</p>
-            <p><strong>Pages:</strong> {String(processing.documentInfo.pageCount)}</p>
-            <p><strong>Chunks:</strong> {String(processing.documentInfo.totalChunks)}</p>
-            <p><strong>Content Length:</strong> {((processing.documentInfo.contentLength as number) / 1024).toFixed(2)} KB</p>
+            <p><strong>Status:</strong> Ready for questions</p>
           </div>
-          <p className="text-xs text-green-600">Ready to answer questions about this document!</p>
+          <p className="text-xs text-green-600">You can now ask questions about this document!</p>
           <button
             onClick={handleReset}
             className="mt-2 px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-xs rounded transition-colors"
