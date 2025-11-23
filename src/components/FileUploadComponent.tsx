@@ -182,9 +182,20 @@ export const FileUploadComponent = ({ onFileProcessed }: FileUploadComponentProp
         <button
           onClick={handleProcessDocument}
           disabled={processing.loading}
-          className="w-full mt-3 px-4 py-2 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-400 text-white font-semibold rounded transition-colors duration-200 text-sm"
+          className="w-full mt-3 px-4 py-2 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-400 text-white font-semibold rounded transition-colors duration-200 text-sm flex items-center justify-center gap-2"
         >
-          {processing.loading ? 'Processing Document...' : 'Process & Ready for Questions'}
+          {processing.loading ? (
+            <>
+              <div className="flex space-x-1">
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" />
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce delay-100" />
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce delay-200" />
+              </div>
+              <span>Processing Document...</span>
+            </>
+          ) : (
+            'Process & Ready for Questions'
+          )}
         </button>
       )}
 

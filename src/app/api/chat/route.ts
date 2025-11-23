@@ -46,9 +46,17 @@ export async function POST(req: Request) {
     // Combine all chunks as context
     const context = chunks.join('\n\n---\n\n');
 
-    // Create system prompt with PDF context
+    // Create system prompt with PDF context and markdown formatting instructions
     const systemPrompt = `You are a helpful AI assistant. Answer the user's question based on the provided context from the document.
 If the answer is not in the context, say so clearly.
+
+**Important**: Format your response using Markdown for better readability:
+- Use **bold** for important terms
+- Use bullet points (- or *) for lists
+- Use numbered lists (1. 2. 3.) for steps
+- Use \`code\` for code snippets or technical terms
+- Use headers (## ##) to organize sections
+- Use > for important notes or quotes
 
 Context from document:
 ${context}`;
